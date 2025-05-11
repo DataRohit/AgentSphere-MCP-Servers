@@ -1,0 +1,14 @@
+[project]
+name = "open-weather-mcp-server"
+version = "0.1.0"
+description = "An MCP server for OpenWeather API featuring tools for current weather, hourly and daily forecasts, and air pollution data (current and forecast)."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [ "mcp>=1.6.0", "colorama==0.4.6", "httpx==0.28.1", "python-dotenv==1.1.0",]
+
+[build-system]
+requires = [ "hatchling",]
+build-backend = "hatchling.build"
+
+[project.scripts]
+open-weather-mcp-server = "open_weather_mcp_server:main"

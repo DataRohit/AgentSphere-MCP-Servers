@@ -1,0 +1,14 @@
+[project]
+name = "news-api-mcp-server"
+version = "0.1.0"
+description = "An MCP server for News API offering tools to fetch the latest news and top headlines seamlessly."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["mcp>=1.6.0", "colorama==0.4.6", "httpx==0.28.1", "python-dotenv==1.1.0"]
+
+[build-system]
+requires = [ "hatchling",]
+build-backend = "hatchling.build"
+
+[project.scripts]
+news-api-mcp-server = "news_api_mcp_server:main"

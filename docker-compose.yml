@@ -1,0 +1,75 @@
+services:
+    # SerpAPI Google MCP Server service
+    serpapi-google-mcp-server:
+        build:
+            context: ./serpapi-google-mcp-server
+            dockerfile: Dockerfile
+        container_name: serpapi-google-mcp-server
+        image: serpapi-google-mcp-server:latest
+        env_file:
+            - ./serpapi-google-mcp-server/.env
+        volumes:
+            - ./serpapi-google-mcp-server:/app
+        ports:
+            - "8093:8000"
+        networks:
+            - agentsphere-network
+        restart: unless-stopped
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
+
+    # News API MCP Server service
+    news-api-mcp-server:
+        build:
+            context: ./news-api-mcp-server
+            dockerfile: Dockerfile
+        container_name: news-api-mcp-server
+        image: news-api-mcp-server:latest
+        env_file:
+            - ./news-api-mcp-server/.env
+        volumes:
+            - ./news-api-mcp-server:/app
+        ports:
+            - "8091:8000"
+        networks:
+            - agentsphere-network
+        restart: unless-stopped
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
+
+    # OpenWeather MCP Server service
+    open-weather-mcp-server:
+        build:
+            context: ./open-weather-mcp-server
+            dockerfile: Dockerfile
+        container_name: open-weather-mcp-server
+        image: open-weather-mcp-server:latest
+        env_file:
+            - ./open-weather-mcp-server/.env
+        volumes:
+            - ./open-weather-mcp-server:/app
+        ports:
+            - "8092:8000"
+        networks:
+            - agentsphere-network
+        restart: unless-stopped
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
+
+networks:
+    agentsphere-network:
+        name: agentsphere-network
+        driver: bridge
+        external: true
